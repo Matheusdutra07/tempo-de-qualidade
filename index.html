@@ -1,0 +1,133 @@
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contador do Amor 💜</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to right, #a18cd1, #fbc2eb);
+      color: #fff;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      position: relative;
+    }
+
+    .container {
+      background-color: rgba(0,0,0,0.2);
+      padding: 25px;
+      border-radius: 25px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.3);
+      width: 90%;
+      max-width: 350px;
+      z-index: 2;
+    }
+
+    h1 {
+      font-size: 1.8em;
+      margin-bottom: 10px;
+    }
+
+    #contador {
+      font-size: 2em;
+      margin: 10px 0;
+      font-weight: bold;
+    }
+
+    .mensagem {
+      font-size: 1.2em;
+      margin-top: 10px;
+      font-style: italic;
+    }
+
+    .heart {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: rgb(195, 0, 255);
+      transform: rotate(45deg);
+      animation: fall 6s linear infinite;
+      opacity: 0.7;
+    }
+
+    .heart::before,
+    .heart::after {
+      content: '';
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: rgb(195, 0, 255);
+      border-radius: 50%;
+    }
+
+    .heart::before {
+      top: -10px;
+      left: 0;
+    }
+
+    .heart::after {
+      left: -10px;
+      top: 0;
+    }
+
+    @keyframes fall {
+      0% {
+        top: -10%;
+        transform: translateX(0) rotate(45deg);
+      }
+      100% {
+        top: 110%;
+        transform: translateX(100px) rotate(45deg);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Faltam exatamente</h1>
+    <div id="contador"></div>
+    <div class="mensagem">para três anos💜</div>
+    <div class="mensagem">Na verdade, quero passar a vida toda contigo, pois ao seu lado tudo faz sentido💜💜💜</div>
+  </div>
+
+  <script>
+    const targetDate = new Date("2025-11-19T00:00:00");
+    function updateCountdown() {
+      const now = new Date();
+      const diff = targetDate - now;
+
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+      const minutes = Math.floor((diff / (1000 * 60)) % 60);
+      const seconds = Math.floor((diff / 1000) % 60);
+
+      document.getElementById("contador").innerHTML =
+        `<strong>${days}</strong>d <strong>${hours}</strong>h <strong>${minutes}</strong>m <strong>${seconds}</strong>s`;
+    }
+
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+
+    // Corações caindo
+    const createHeart = () => {
+      const heart = document.createElement('div');
+      heart.classList.add('heart');
+      heart.style.left = Math.random() * 100 + 'vw';
+      heart.style.animationDuration = (Math.random() * 3 + 3) + 's';
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), 6000);
+    };
+
+    setInterval(createHeart, 300);
+  </script>
+</body>
+</html>
